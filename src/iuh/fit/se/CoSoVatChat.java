@@ -2,7 +2,7 @@
  * @description: Lop truu tuong mo ta co so vat chat
  * @author: HP
  * @version: 1.0
- * @created: Sep 3, 2025 8:13:42 PM
+ * @created: Sep 20, 2025 8:13:42 PM
  */
 package iuh.fit.se;
 
@@ -19,15 +19,20 @@ public abstract class CoSoVatChat {
     public enum KichCo {
         NHO, VUA, LON
     }
+    
+    
+    
+    public CoSoVatChat() {
+		this("",ChatLieu.GO,KichCo.NHO,4);
+	}
 
-    public CoSoVatChat(String ma, ChatLieu chatLieu, KichCo kichCo, int soChan) {
+	public CoSoVatChat(String ma, ChatLieu chatLieu, KichCo kichCo, int soChan) {
         if (ma == null || ma.trim().isEmpty()) {
             throw new IllegalArgumentException("Ma khong duoc de trong!");
         }
-        if (soChan < 0) {
-            throw new IllegalArgumentException("So chan khong hop le!");
+        if (soChan <= 0) {
+            throw new IllegalArgumentException("So chan phai lon hon 0!");
         }
-
         this.ma = ma;
         this.chatLieu = chatLieu;
         this.kichCo = kichCo;
@@ -66,12 +71,13 @@ public abstract class CoSoVatChat {
     }
 
     public void setSoChan(int soChan) {
-        if (soChan < 0) {
-            throw new IllegalArgumentException("So chan khong hop le!");
+        if (soChan <= 0) {
+            throw new IllegalArgumentException("So chan phai lon hon 0!");
         }
         this.soChan = soChan;
     }
 
+    // Phuong thuc truu tuong
     public abstract double canNang();
 
     @Override
